@@ -4,34 +4,34 @@ module.exports = function(models, logger) {
 	var me = this;
 
 	//create
-	me.create = function(data) {
-		var deferred = Q.defer();
+	// me.create = function(data) {
+	// 	var deferred = Q.defer();
 
-		var newProfile = models.profile.build(data);
-		newProfile.save()
-		.success(function(param1, param2) {
-			logger.debug(param1);
-			logger.debug(param2);
-			deferred.resolve(newProfile);
-		})
-		.error(deferred.reject);
+	// 	var newProfile = models.profile.build(data);
+	// 	newProfile.save()
+	// 	.success(function(param1, param2) {
+	// 		logger.debug(param1);
+	// 		logger.debug(param2);
+	// 		deferred.resolve(newProfile);
+	// 	})
+	// 	.error(deferred.reject);
 
-		return deferred.promise;
-	};
+	// 	return deferred.promise;
+	// };
 
-	me.find = function() {
-		return me.findWhere({});
-	}
+	// me.find = function() {
+	// 	return me.findWhere({});
+	// }
 
-	me.findWhere = function(config) {
-		var deferred = Q.defer();
+	// me.findWhere = function(config) {
+	// 	var deferred = Q.defer();
 
-		models.profile.findAll({where :config})
-		.success(deferred.resolve)
-		.error(deferred.reject);
+	// 	models.profile.findAll({where :config})
+	// 	.success(deferred.resolve)
+	// 	.error(deferred.reject);
 
-		return deferred.promise;
-	};
+	// 	return deferred.promise;
+	// };
 
 	//delete
 	//TODO need to handle soft delete
@@ -80,14 +80,15 @@ module.exports = function(models, logger) {
 	me.verify = function(user, key) {
 		var deferred = Q.defer();
 
-		models.profile.find({where: {email: user}}).
-		success(function(profile) {
-			if(!profile || profile.key !== key) {
+		models.profile.findOne({email: user}, function(err, profile) {
+			if(err) {
+				deferred.reject(err);
+			} else if(!profile || profile.key !== key) {
 				deferred.resolve(null);
 			} else {
 				deferred.resolve(profile.level);
 			}
-		}).error(deferred.reject);
+		});
 
 		return deferred.promise;
 	};
