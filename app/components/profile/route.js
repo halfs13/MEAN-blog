@@ -27,7 +27,7 @@ module.exports = function(app, services, logger) {
 				res.end();
 			});
 		} else {
-			services.response_handler.send403(res, "Requires SSL");
+			services.response_handler.send403(res, {error: 'Requires SSL'});
 		}
 	});
 
@@ -43,7 +43,7 @@ module.exports = function(app, services, logger) {
 				res.end();
 			});
 		} else {
-			services.response_handler.send403(res, "Requires SSL");
+			services.response_handler.send403(res, {error: 'Requires SSL'});
 		}
 	});
 
@@ -59,7 +59,7 @@ module.exports = function(app, services, logger) {
 				res.end();
 			});
 		} else {
-			services.response_handler.send403(res, "Requires SSL");
+			services.response_handler.send403(res, {error: 'Requires SSL'});
 		}
 	});
 

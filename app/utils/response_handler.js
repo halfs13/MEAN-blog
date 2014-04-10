@@ -37,6 +37,16 @@ general.send400 = function(res, msg){
 	res.end();
 };
 
+general.send401 = function(res, msg){
+	res.status(401);
+	if (undefined === msg) {
+		res.jsonp({error: 'Unauthorized'});
+	} else {
+		res.jsonp(msg);
+	}
+	res.end();
+};
+
 general.send403 = function(res, msg){
 	res.status(403);
 	if (undefined === msg) {
