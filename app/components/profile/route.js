@@ -1,7 +1,7 @@
 var crypto = require('crypto');
 
 module.exports = function(app, services, logger) {
-	app.post("/profile/?", services.profile.verifyAdmin, function(req, res) {
+	app.post("/rest/profile/?", services.profile.verifyAdmin, function(req, res) {
 		if(req.secure) {
 			//if admin
 
@@ -31,7 +31,7 @@ module.exports = function(app, services, logger) {
 		}
 	});
 
-	app.get("/profile/?", services.profile.verifyAdmin, function(req, res) {
+	app.get("/rest/profile/?", services.profile.verifyAdmin, function(req, res) {
 		if(req.secure) {
 			//if admin
 			services.profile.find().
@@ -47,7 +47,7 @@ module.exports = function(app, services, logger) {
 		}
 	});
 
-	app.patch("/profile/:id([0-9a-f]+)", services.profile.verifyAdmin, function(req, res) {
+	app.patch("/rest/profile/:id([0-9a-f]+)", services.profile.verifyAdmin, function(req, res) {
 		if(req.secure) {
 			services.profile.update(req.body)
 			.then(function(result) {
@@ -63,7 +63,7 @@ module.exports = function(app, services, logger) {
 		}
 	});
 
-	app.post("/login/?", function(req, res) {
+	app.post("/rest/login/?", function(req, res) {
 		if(req.secure) {
 			if(!req.body.email || !req.body.password) {
 				logger.error("Missing username or password");
@@ -100,7 +100,7 @@ module.exports = function(app, services, logger) {
 		}
 	});
 
-	app.get("/logout/?", function(req, res) {
+	app.get("/rest/logout/?", function(req, res) {
 		req.session.destroy();
 		res.end();
 	});

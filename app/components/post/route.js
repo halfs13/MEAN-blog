@@ -1,49 +1,48 @@
+//FIXME This file contains code from https://github.com/NextCenturyCorporation/everest licensed under MIT
+//This code is being used as reference and is not intended for use
+
 module.exports = function(app, services, io, logger) {
 	app.get("/rest/post/?", function(req, res) {
 		logger.debug("Request for a list of all posts");
 
-		// services.post.list(req.query)
-		// .then(function(docs, config) {
-		// 	services.alert.getTotalCount(config, function(err, count) {
-		// 		if (err) {
-		// 			logger.error("Alert: " + err, err);
-		// 			services.response_handler.send500(res, "Error getting count of Alerts");
-		// 		} else {
-		// 			res.jsonp({docs: docs, total_count: count});
-		// 			res.end();
-		// 		}
-		// 	});
-		// })
-		// .catch(function(err) {
-		// 	logger.error("Error listing Alerts", err);
-		// 	services.response_handler.send500(res, "Error listing Alerts " + err);
-		// })
+		services.post.list(req.query)
+		.then(function(docs, config) {
+			if (err) {
+				logger.error("Alert: " + err, err);
+				services.response_handler.send500(res, "Error getting posts");
+			} else {
+				res.jsonp({docs: docs, total_count: count});
+				res.end();
+			});
+		})
+		.catch(function(err) {
+			logger.error("Error listing posts", err);
+			services.response_handler.send500(res, "Error listing posts " + err);
+		});
 	});
 
 	/**
-	 * List createdDate for all of the Alerts (in milliseconds)
+	 * List createdDate for all of the posts (in milliseconds)
 	 */
 	app.get("/rest/post/dates/?", function(req,res) {
 		logger.debug("Request for list of dates of posts");
 
-		// services.alert.findDates(function(dates) {
-		// 	if (!dates) {
-		// 		services.response_handler.send500(res, "Error getting dates for Alert");
-		// 	} else {
-		// 		res.jsonp(dates);
-		// 		res.end();
-		// 	}
-		// });
+		services.post.findDates(function(dates) {
+			if (!dates) {
+				services.response_handler.send500(res, "Error getting dates for posts");
+			} else {
+				res.jsonp(dates);
+				res.end();
+			}
+		});
 	});
 
-	/**
-	 * Create a new alert
-	 */
 	app.post("/rest/post/?", function(req, res) {
 		logger.debug("Receiving new post ", req.body);
 		//FIXME need to check logged in and admin
 
 
+		// MIT licensed Next Century EVEREST code
 		// services.alert.create(req.body, function(err, val, newAlert) {
 		// 	if (err) {
 		// 		logger.error("Error saving Alert", err);
@@ -58,6 +57,7 @@ module.exports = function(app, services, io, logger) {
 		// });
 	});
 
+	// MIT licensed Next Century EVEREST code
 	// app.get("/alert/:id([0-9a-f]+)", function(req, res) {
 	// 	logger.debug("Request for Alert " + req.params.id);
 
