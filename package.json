@@ -1,0 +1,17 @@
+{
+    "name": "MEAN-blog",
+    "version": "0.0.1",
+    "main": "app.js",
+    "private": true,
+    "dependencies": {
+        "express": ">=3.0.x",
+        "grunt": ">=0.4.2",
+        "grunt-cli": ">=0.1.9",
+        "grunt-contrib-jshint": ">=0.6.3",
+        "grunt-jsdoc": "~0.4.1",
+        "jshint": "~2.3.0",
+        "q": ">=0.0.x",
+        "mongoose": ">=0.0.x",
+        "winston": ">=0.6.1"
+    }
+}

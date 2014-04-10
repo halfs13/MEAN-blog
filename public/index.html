@@ -1,0 +1,21 @@
+<html ng-app="meanBlog">
+	<head>
+		<title>{{blog.title}}</title>
+
+		<link href="./app/css/app.css" rel="stylesheet" type="text/css" />
+
+		<link rel="stylesheet" href="./app/css/bootstrap.css" />
+		<link rel="stylesheet" href="./app/css/bootstrap-theme.css" />
+	</head>
+	<body>
+		<div ng-view></div>
+
+		<script src="./app/lib/angular.js"></script>
+		<script src="./app/lib/angular-route.min.js"></script>
+		<script src="./app/lib/angular-resource.min.js"></script>
+
+		<script src="app/js/app.js"></script>
+		<!--script src="js/app/controllers/loginController.js"></script-->
+		<script src="app/js/controllers/blogController.js"></script>
+	</body>
+</html>
