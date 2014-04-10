@@ -43,9 +43,10 @@ module.exports = function(models, logger) {
 		if(req.session && req.session.level) {
 			next();
 		} else {
-			logger.debug("UNAUTHORIZED -- access level [[" + 
+			logger.debug("UNAUTHORIZED -- access level [[" +
 				(req.session && req.session.level ? req.session.level : "none") + "]]");
-			res.status(403);
+			res.status(401);
+			res.jsonp({error: 'Invalid authorization level'});
 			res.end();
 		}
 	};
@@ -55,9 +56,10 @@ module.exports = function(models, logger) {
 			(req.session.level === 'dev' || req.session.level === 'admin')) {
 			next();
 		} else {
-			logger.debug("UNAUTHORIZED -- access level [[" + 
+			logger.debug("UNAUTHORIZED -- access level [[" +
 				(req.session && req.session.level ? req.session.level : "none") + "]]");
-			res.status(403);
+			res.status(401);
+			res.jsonp({error: 'Invalid authorization level'});
 			res.end();
 		}
 	};
@@ -66,9 +68,10 @@ module.exports = function(models, logger) {
 		if(req.session && req.session.level && req.session.level === 'admin') {
 			next();
 		} else {
-			logger.debug("UNAUTHORIZED -- access level [[" + 
+			logger.debug("UNAUTHORIZED -- access level [[" +
 				(req.session && req.session.level ? req.session.level : "none") + "]]");
-			res.status(403);
+			res.status(401);
+			res.jsonp({error: 'Invalid authorization level'});
 			res.end();
 		}
 	};
