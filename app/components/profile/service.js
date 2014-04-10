@@ -4,20 +4,20 @@ module.exports = function(models, logger) {
 	var me = this;
 
 	//create
-	// me.create = function(data) {
-	// 	var deferred = Q.defer();
+	me.create = function(data) {
+		var deferred = Q.defer();
 
-	// 	var newProfile = models.profile.build(data);
-	// 	newProfile.save()
-	// 	.success(function(param1, param2) {
-	// 		logger.debug(param1);
-	// 		logger.debug(param2);
-	// 		deferred.resolve(newProfile);
-	// 	})
-	// 	.error(deferred.reject);
+		var newProfile = new models.profile(data);
+		newProfile.save(function(err) {
+			if(err) {
+				deferred.reject(err);
+			} else {
+				deferred.resolve(newProfile);
+			}
+		});
 
-	// 	return deferred.promise;
-	// };
+		return deferred.promise;
+	};
 
 	// me.find = function() {
 	// 	return me.findWhere({});
