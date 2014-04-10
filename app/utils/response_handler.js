@@ -8,7 +8,7 @@ general.send200 = function(res, msg){
 	if (undefined === msg) {
 		res.jsonp({status: 'OK'});
 	} else {
-		res.jsonp(msg);		
+		res.jsonp(msg);
 	}
 	res.end();
 };
@@ -32,7 +32,17 @@ general.send400 = function(res, msg){
 	if (undefined === msg) {
 		res.jsonp({error: 'Bad Request'});
 	} else {
-		res.jsonp(msg);		
+		res.jsonp(msg);
+	}
+	res.end();
+};
+
+general.send403 = function(res, msg){
+	res.status(403);
+	if (undefined === msg) {
+		res.jsonp({error: 'Private resource'});
+	} else {
+		res.jsonp(msg);
 	}
 	res.end();
 };
@@ -43,7 +53,7 @@ general.send404 = function(res, msg){
 	if (undefined === msg) {
 		res.jsonp({error: 'Not found'});
 	} else {
-		res.jsonp(msg);		
+		res.jsonp(msg);
 	}
 	res.end();
 };
